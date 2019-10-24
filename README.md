@@ -11,7 +11,8 @@ match the termbox_util functions and so you can embed viewplanes in viewplanes.
 This is not fine, mature code. I'm just throwing it out there so it doesn't get
 lost on my disk. Someone might find it useful. I used it to make a linux Point-of-sale
 curses program available on Windows without the user having to install half
-a dozen libraries.
+a dozen libraries. Also the debugger in py6502 uses it.
 
 How to use..
 
+Will come soon..
