@@ -2,10 +2,10 @@
 A library to sit on top of termbox in python to provide a bunch of curses like functions and virtual viewplanes.
 
 Termbox is nice and all, but curses provides more goodies to play with.
-This library sits provides a number of curses-like functions to draw on a termbox screen.
+This library provides a number of curses-like functions to draw on a termbox screen.
 
 A viewplane class lets you create virtual viewplanes of arbitary size and map a 
-viewport onto the viewplan in the real termbox display. The viewplane functions
+viewport onto the viewplane in the real termbox display. The viewplane functions
 match the termbox_util functions and so you can embed viewplanes in viewplanes.
 
 This is not fine, mature code. I'm just throwing it out there so it doesn't get
