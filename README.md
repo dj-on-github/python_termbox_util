@@ -20,7 +20,7 @@ It clears the screen, works out where the middle is and puts
 the text in the middle.
 
 
-```
+```python
 #!/usr/bin/env python3
 # -*- encoding: utf-8 -*-
 
