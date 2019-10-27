@@ -332,11 +332,25 @@ class termbox_util():
     def draw_viewplane_window(self,vp,width,height,srcx,srcy,viewx,viewy):
         if width < 1 or height < 1:
             return
-        if width+srcx > vp.width():
+
+        # Don't show if off screen
+        if srcx > vp.width():
             return
-        if height+srcy > vp.height():
+        if srcy > vp.height():            
             return
         
+        # Cope with partially off screen
+        if width+srcx > vp.width():
+            width=vp.width()-srcx
+            
+        if height+srcy > vp.height():            
+            height = vp.height()-srcy
+        
+        if width < 1:
+            return
+        if height < 1:
+            return
+            
         for line in range(height):
             for i in range(width):
                 ch = vp.chars[line+srcy][i+srcx]
@@ -377,8 +391,12 @@ class termbox_util():
     
     def move_persistent_viewplane_window(self,pid,new_srcx,new_srcy):
         (vp,width,height,srcx,srcy,viewx,viewy, active) = self.persistent_vp_list[pid]
-        self.persistent_vp_list[pid] = (vp,width,height,new_srcx,new_srcy,viewx,viewy,True)
-        
+        self.persistent_vp_list[pid] = (vp,width,height,new_srcx,new_srcy,viewx,viewy,active)
+
+    def move_persistent_viewplane_position(self,pid,new_x,new_y):
+        (vp,width,height,srcx,srcy,viewx,viewy, active) = self.persistent_vp_list[pid]
+        self.persistent_vp_list[pid] = (vp,width,height,srcx,srcy,new_x,new_y,active)
+                
     def activate_persistent_vp(self,pid):
         (vp,width,height,srcx,srcy,viewx,viewy, active) = self.persistent_vp_list[pid]
         self.persistent_vp_list[pid] = (vp,width,height,srcx,srcy,viewx,viewy,True)
@@ -389,15 +407,29 @@ class termbox_util():
     
     # Calls the underlaying present() but also draws any active persistent
     # viewplanes in the persistent_vp_list()
-                
-    def present(self):
+    
+    def draw_persistent_viewplanes(self):
         for pvp in self.persistent_vp_list:
             (vp,width,height,srcx,srcy,viewx,viewy,active) = pvp
             if active:
                 self.draw_viewplane_window(vp,width,height,srcx,srcy,viewx,viewy)
+    
+    def present_without_persistent_viewplanes(self):
         present_method = getattr(self.tb, "present", None)
         if callable(present_method):
             self.tb.present()
+                            
+    def present(self):
+        self.draw_persistent_viewplanes()
+        self.present_without_persistent_viewplanes()
+        
+        #for pvp in self.persistent_vp_list:
+        #    (vp,width,height,srcx,srcy,viewx,viewy,active) = pvp
+        #    if active:
+        #        self.draw_viewplane_window(vp,width,height,srcx,srcy,viewx,viewy)
+        #present_method = getattr(self.tb, "present", None)
+        #if callable(present_method):
+        #    self.tb.present()
     
     # Asks the user to press a few keys, to build a dictionary of a key map
                 
