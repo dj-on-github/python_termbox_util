@@ -47,4 +47,10 @@ with termbox.Termbox() as tbinst:
 
 For now the examples moving_window.py, tbu_hello_world.py and util_demo.py are all the documentation.
 
+The exampple file moving_window.py is making a viewplane the same size as the screen. It fills this
+viewplane with random characters. Then it makes a 16x8 window onto the view plane. You can move the
+window around with the arrow keys and it moves the view position to match so it acts like a window
+onto a fixed pattern below.
 
+util_demo.py messes around with viewplanes and ativating and deactivating them so they disappear and
+reappear.
