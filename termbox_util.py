@@ -113,12 +113,6 @@ class viewplane(object):
                 self.bgs[i].join(self.bgline[self.iwidth:width])
                 
             self.iwidth = width
-            
-    #def present(self):
-    #    for pvp in self.persistent_vp_list:
-    #        (vp,width,height,srcx,srcy,viewx,viewy,active) = pvp
-    #        if active:
-    #            self.draw_viewplane_window(vp,width,height,srcx,srcy,viewx,viewy)
         
 # The utility functions that operate over a termbox or viewplane
 #             

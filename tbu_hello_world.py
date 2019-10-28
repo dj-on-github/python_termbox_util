@@ -15,7 +15,6 @@ with termbox.Termbox() as tbinst:
     tb.clear()          # clear screen
     tb.border()         # border around screen
     tb.addstr(x, y, "Hello World!")  # Put Hello World! into screen
-
     tb.present()        # Display it
 
     # Get a keypress to exit

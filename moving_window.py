@@ -17,7 +17,7 @@ with termbox.Termbox() as tbinst:
     vptb = termbox_util(vp)
     
     #view window width
-    vww = 8
+    vww = 16
     #view window height
     vwh = 8
     
@@ -30,8 +30,8 @@ with termbox.Termbox() as tbinst:
     
     #Fill the viewplane with stuff.
     vptb.clear()
-    for y in range(maxx):
-        for x in range(maxy):
+    for x in range(maxx):
+        for y in range(maxy):
             vptb.addstr(x,y,random.choice([u"\u2215",'\\','-',' ']))
             
     tb.clear()
