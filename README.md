@@ -6,13 +6,51 @@ This library provides a number of curses-like functions to draw on a termbox scr
 
 A viewplane class lets you create virtual viewplanes of arbitary size and map a 
 viewport onto the viewplane in the real termbox display. The viewplane functions
-match the termbox_util functions and so you can embed viewplanes in viewplanes.
+match the termbox functions and so you can embed viewplanes in viewplanes.
 
 This is not fine, mature code. I'm just throwing it out there so it doesn't get
 lost on my disk. Someone might find it useful. I used it to make a linux Point-of-sale
 curses program available on Windows without the user having to install half
 a dozen libraries. Also the debugger in py6502 uses it.
 
-How to use..
+**Hello World**
 
-Will come soon..
+The hello world example is pretty verbose by hello world standards.
+It clears the screen, works out where the middle is and puts
+the text in the middle.
+
+
+```python
+#!/usr/bin/env python3
+# -*- encoding: utf-8 -*-
+
+import termbox
+from termbox_util import termbox_util
+
+with termbox.Termbox() as tbinst:
+    tb = termbox_util(tbinst)
+
+    # Find the middle of the screen
+    maxx,maxy=tb.getmaxxy()
+    x = int(maxx/2) - 6   # 6 is half of length of "Hello World"
+    y = int(maxy/2)
+
+    tb.clear()          # clear screen
+    tb.border()         # border around screen
+    tb.addstr(x, y, "Hello World!")  # Put Hello World! into screen
+
+    tb.present()        # Display it
+
+    # Get a keypress to exit
+    event = tbinst.poll_event()
+```
+
+For now the examples moving_window.py, tbu_hello_world.py and util_demo.py are all the documentation.
+
+The example file moving_window.py is making a viewplane the same size as the screen. It fills this
+viewplane with random characters. Then it makes a 16x8 window onto the view plane. You can move the
+window around with the arrow keys and it moves the view position to match so it acts like a window
+onto a fixed pattern below.
+
+util_demo.py messes around with viewplanes and ativating and deactivating them so they disappear and
+reappear.
