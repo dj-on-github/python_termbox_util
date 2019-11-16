@@ -53,7 +53,7 @@ with termbox.Termbox() as tbinst:
 
         # Get a keypress
         event = tbinst.poll_event()
-        # untangle it's fields
+        # untangle its fields
         (type, ch, key, mod, w, h, x, y ) = event
         
         # Exit when escape pressed.
